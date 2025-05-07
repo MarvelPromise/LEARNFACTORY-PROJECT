@@ -1,0 +1,41 @@
+{% extends 'store/main.html' %}
+
+{% block title %}Payment{% endblock %}
+
+{% block content %}
+<div class="container1">
+    <h2>Payment</h2>
+
+<div class="gate">
+    {% if request.session.payment_method == 'card' %}
+        <h3>Enter your Credit/Debit Card details</h3>
+        <form method="POST" action="{% url 'confirm_payment' %}">
+            {% csrf_token %}
+            
+            <label for="card_number">Card Number:</label><br>
+            <input type="text" name="card_number" placeholder="Card Number" required><br>
+
+            <label for="expiry_date">Expiry Date:</label><br>
+            <input type="text" name="expiry_date" placeholder="MM/YY" required><br>
+
+            <label for="cvv">CVV:</label><br>
+            <input type="text" name="cvv" placeholder="CVV" required><br>
+
+            <button type="submit" class="btn">Confirm Payment</button>
+        </form>
+
+    {% elif request.session.payment_method == 'paypal' %}
+        <h3>Redirecting to PayPal...</h3>
+        <p>If you are not redirected automatically, click the button below:</p>
+        <form method="POST" action="{% url 'confirm_payment' %}">
+            {% csrf_token %}
+            <button type="submit">Pay with PayPal</button>
+        </form>
+
+    {% else %}
+        <p>Invalid payment method.</p>
+    {% endif %}
+</div>
+</div>
+
+{% endblock %}

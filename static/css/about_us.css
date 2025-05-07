@@ -1,0 +1,156 @@
+*{
+  padding: 0px;
+  margin: 0px;
+  text-decoration: none;
+}
+
+.min{
+  margin-left: 50px;
+
+}
+.get{
+  border: 1px solid greenyellow;
+  border-radius: 10px;
+  margin-left: 1050px;
+  margin-right: 250px;
+  text-align: center;
+  height: 45px;
+  width: 100px;
+  background-color: rgb(166, 218, 255);
+ 
+  
+  
+}
+h4{
+  margin-top: 10px;
+  
+  
+}
+img{
+  height: 340px;
+  width: 350px;
+  background-color: black;
+  border-radius: 10px;
+}
+.part{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 25px;
+  margin-right:25px ;
+  border: 2px solid ;
+  background-color: rgb(3, 16, 0);
+  height: 150px;
+  border-radius: 6px;
+  color: white;
+  
+}
+.ship{
+  margin-top: 30px;
+}
+
+.ido{
+  margin-top: 20px;
+}
+.ship h3{
+  text-align: center;
+  margin-bottom: 15px;
+}
+.b2b{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.all{
+  padding-left: 105px;
+  border: 1px solid;
+  border-radius: 50px;
+  width: 100%;
+}
+.b2c{
+  border: 2px solid;
+  border-radius: 15px;
+  margin-top: 15px;
+}
+.retail{
+  border: 2px solid;
+  border-radius: 15px;
+  margin-top: 15px; 
+}
+.lo{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin-left: 90px;
+  margin-top: 30px;
+  padding: 20px;
+}
+.harmony{
+  color: white;
+  background-color: rgb(2, 12, 1);
+  margin-top: 40px;
+  padding-top: 30px;
+  height: 700px;
+}
+.lop{
+  margin-left: 80px;
+}
+.DG{
+  display: flex;
+  justify-content: space-between;
+}
+.BB{
+  border: 1px solid;
+  border-radius: 10px;
+  height: 220px;
+  width: 45%;
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-top: -50px;
+  background-color: white;
+  background-color: rgb(197, 246, 197);
+}
+.BB h4{
+  margin-left: 30px;
+  font-size: 1.4rem;
+  margin-top: 30px;
+
+}
+.BB P{
+  font-size: 1.3rem;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.end{
+  display: flex;
+  justify-content: space-between;
+  justify-content: space-around;
+  height: 400px;
+}
+.eco{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  height: 200px;
+  margin-top: 70px;
+}
+.eco p{
+  font-size: 1.3rem;
+}
+.eco H2{
+  font-size: 2.7rem;
+}
+.eco h4{
+  margin-bottom: 10px;
+}
+.ser{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  margin-top: 70px;
+  
+}
+.ser p{
+  font-size: 1.3rem;
+}
+.ser h2{
+  font-size: 2.7rem;
+}

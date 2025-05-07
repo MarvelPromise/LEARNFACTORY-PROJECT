@@ -1,0 +1,58 @@
+/* watch.css */
+.watch-header {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 20px;
+  color: #222;
+}
+
+.watch-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.watch-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.watch-card:hover {
+  transform: scale(1.05);
+}
+
+.watch-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.watch-card h3 {
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+.watch-card p {
+  color: #555;
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.watch-card .btn {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.watch-card .btn:hover {
+  background-color: #555;
+}

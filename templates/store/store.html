@@ -1,0 +1,27 @@
+{% extends 'store/main.html' %}
+
+{% block title %}Store{% endblock %}
+
+{% block content %}
+<h1>Welcome to Our Store</h1>
+
+<div class="product-grid">
+    {% for product in products %}
+        <div class="product-card">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p>Price: ${{ product.price }}</p>
+        </div>
+    {% empty %}
+        <p>No products available.</p>
+    {% endfor %}
+</div>
+
+<h3>Shop by Category</h3>
+<ul>
+  {% for category in categories %}
+    <li><a href="{% url 'products_by_category' category.slug %}">{{ category.name }}</a></li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'store/main.html' %}
+{% block content %}
+
+<h2>Admin Dashboard</h2>
+
+<div class="dashboard-cards">
+  <div class="card">Total Products: {{ total_products }}</div>
+  <div class="card">Total Orders: {{ total_orders }}</div>
+  <div class="card">Total Customers: {{ total_customers }}</div>
+</div>
+
+<h3>Recent Orders</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Customer</th>
+      <th>Status</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in recent_orders %}
+    <tr>
+      <td>#{{ order.id }}</td>
+      <td>{{ order.customer.name }}</td>
+      <td>{{ order.status }}</td>
+      <td>${{ order.get_cart_total }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h3>Low Stock Products</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Stock Left</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in low_stock_products %}
+    <tr>
+      <td>{{ product.name }}</td>
+      <td>{{ product.stock }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

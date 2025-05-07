@@ -1,0 +1,32 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+
+<div class="cart-container">
+    <h1>Your Cart</h1>
+    
+    {% if cart_items %}
+        <ul class="cart-list">
+            {% for item in cart_items %}
+                <li>
+                    <div class="cart-item-info">
+                        {{ item.product.name }} - ₦{{ item.product.price }} x {{ item.quantity }}
+                        ₦{{ item.product.price|floatformat:2|add:item.quantity|floatformat:2 }}
+                    </div>
+                    <div class="cart-actions">
+                        <a href="{% url 'remove_from_cart' item.product.id %}">Remove</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <p><strong>Total: ₦{{ total_price|floatformat:2 }}</strong></p>
+        <div style="text-align: right; margin-top: 10px;">
+            <a href="{% url 'checkout' %}" class="checkout-btn">Proceed to Checkout</a>
+        </div>
+    {% else %}
+        <p class="empty-cart">Your cart is empty.</p>
+    {% endif %}
+</div>
+{% endblock %}

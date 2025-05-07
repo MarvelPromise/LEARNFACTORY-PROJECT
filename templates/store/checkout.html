@@ -1,0 +1,53 @@
+{% extends 'store/main.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+
+<div class="container2">
+ <div class="cont-8">
+  <h2>Checkout</h2>
+
+  <div class="cont-3">
+  
+    <form method="POST" action="{% url 'process_order' %}">
+      {% csrf_token %}
+      
+      <label for="address">Street Address:</label><br>
+      <input type="text" name="address" placeholder="123 Main St" required><br>
+  
+      <label for="city">City:</label><br>
+      <input type="text" name="city" placeholder="City" required><br>
+  
+      <label for="Payment_method">State:</label><br>
+      <select name="Payment_method" id="Payment_method" required>
+        <option value="">Select your State</option>
+        <option value="Abia">Abia State</option>
+        <option value="Paypal">Adamawa</option>
+        <option value="Cash">Akwa Ibom</option>
+        <option value="Cash">Anambra</option>
+        <option value="Cash">Buchi</option>
+        <option value="Cash">Benua</option>
+        <option value="Cash">Borno</option>
+        <option value="Cash">Bayesia</option>
+    </select><br>
+  
+      <label for="zipcode">Zip Code:</label><br>
+      <input type="text" name="zipcode" placeholder="ZIP" required><br>
+  
+      <label for="payment_method">Payment Method:</label><br>
+      <select name="payment_method" id="payment_method" required>
+          <option value="">-- Select a method --</option>
+          <option value="card">Credit/Debit Card</option>
+          <option value="paypal">PayPal</option>
+          <option value="cash">Cash on Delivery</option>
+      </select><br>
+  
+      <button type="submit" class="btn">Confirm Purchase</button>
+  </form>
+  
+  
+  </div>
+ </div>
+</div>
+{% endblock %}

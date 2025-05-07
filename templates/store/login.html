@@ -1,0 +1,57 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<section class="login-form">
+    <div class="Lgn">
+        <h2>Log In</h2>
+    </div>
+    
+    <div class="form-body">
+        <form method="POST">
+            {% csrf_token %}
+            <label for="Email" class="psd">Email</label><br>
+            <input type="email" class="txt" name="email" placeholder="Email..." required><br>
+            <label for="password" class="psd">Password</label><br>
+            <input type="password" name="password" placeholder="Password..." required><br>
+                <div class="pull">
+                   
+                    <a href="" class="rem">Forgetten password</a>
+                </div>
+                <button type="submit" class="sub-btn">Login</button>
+                <div class="Nw">
+                    <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+                </div>
+                <span id="hr">
+                    <hr id="hr1">or<hr id="hr2">
+                </span
+
+                <div class="google">
+                    <a href="google.com"><i class="bi bi-google"></i></a>
+                    <a href="tinker.com"><i class="bi bi-twitter"></i></a>
+                    <a href="facebook.com"><i class="bi bi-facebook"></i></a>
+                </div>
+
+                <div class="policy">
+                    <p>By creating this account, you agree to our <a href="" class="rr">Terms and Condition</a>&<a href="" class="rr">Privacy Policy</a></p>
+                  </div>
+              
+        </form>
+    </div>
+</section>
+
+  <!-- <section class="product-list">
+      {% for product in products %}
+          <div class="product-card">
+              <img src="{{ product.image.url }}" alt="{{ product.name }}">
+              <h2>{{ product.name }}</h2>
+              <p>Price: ₦{{ product.price }}</p>
+              <button>Add to Cart</button>
+          </div>
+      {% empty %}
+          <p>No products available.</p>
+      {% endfor %}
+  </section> -->
+{% endblock %}
