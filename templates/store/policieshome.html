@@ -1,0 +1,44 @@
+{% extends "store/main.html" %}
+
+{% block content %}
+    <div class="">
+        <div class="nav">
+            <hr style="width: 100%; height: 50px;">
+            <nav style="position: absolute; z-index: 1; top: 60px; color: black; text-align: center; " >
+                <ul style="display: flex; gap: 30px; padding-bottom: 2px;">
+                    <li style="list-style-type: none;"><a style="color: white; text-decoration: none;" href="{% url 'privacypolicy' %}">Privacy Policy</a></li>
+                    <li style="list-style-type: none;"><a style="color: white; text-decoration: none;" href="{% url 'customerservicepolicy' %}">Customer Service Policy </a></li>
+                    <li style="list-style-type: none;"><a style="color: white; text-decoration: none;" href="{% url 'intellectualpropertynpolicy' %}">Intellectual Property And Policy</a></li>
+                    <li style="list-style-type: none;"><a style="color: white; text-decoration: none;" href="{% url 'ordercancellationpolicy' %}">Order Cancellation Policy</a></li>
+                    <li style="list-style-type: none;"><a style="color: white; text-decoration: none;" href="{% url 'paymentpolicy' %}">Payment Policy</a></li>
+                    <li style="list-style-type: none;"><a style="color: white; text-decoration: none;" href="{% url 'productwarranty' %}">Product Warranty and Support</a></li>
+                    <li style="list-style-type: none;"><a style="color: white; text-decoration: none;" href="{% url 'returnrefundpolicy' %}">Return and Refund Policy</a></li>
+                    <li style="list-style-type: none;"><a style="color: white; text-decoration: none;" href="{% url 'shippingpolicy' %}">Shipping Policy</a></li>
+                </ul>
+            </nav>
+            <!-- <h1 style="position: absolute; z-index: 1; top: 150px; left: 500px; font-size: 50px; color: whitesmoke;" >POLICIES</h1> -->
+        </div>
+        <div class="intro">
+            <div class="contact-template" style="background-color: rgb(112, 108, 108);">
+                <hr style=" width:100%; height: 55px;"></hr>
+                <img src="../../static/img/policyimg.jpeg" alt="" width="100%" height="400px" style="opacity: 0.8; filter: blur(3px);">
+                <!-- <h1 style="position: absolute; z-index: 1; top: 150px; left: 500px; font-size: 50px; color: whitesmoke;" >POLICIES</h1> -->
+            </div>
+            <p style="font-size: x-large; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; padding: 20px;">Welcome to MAX-CARES' Policy Page. We are committed to transparency and clarity in our business practices, and we are dedicated to ensuring that you have a positive experience with our company. Our policies are designed to protect your rights and interests, while also ensuring that we operate in a fair and responsible manner.</p>
+            <p style="font-size: x-large; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; padding: 20px;">At MAX-CARES, we understand that you have questions and concerns about how we do business. That is why we have put together this collection of policies to help you understand our practices and procedures. We believe that transparency and communication are key to building trust with our customers, and we are committed to being open and honest in all of our dealings.</p>
+            <p style="font-size: x-large; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; padding: 20px;">Below, you will find links to our key policies, which cover everything from returns and refunds to payment security and customer support. We are confident that this information will help you feel more confident and informed as you shop with us.</p>
+        </div>
+        <!-- <h1>Policies</h1>  
+        <p>At MAX-CARES, we are committed to transparency and clarity in our policies. Below, you will find links to our key policies:</p> -->
+        <div class="linkss" style="display: grid; grid-template-columns: repeat(3,1fr); padding: 30px; text-decoration: none;">
+            <h3 style="padding: 20px; margin-bottom: 10px; line-break: 20px;"><a href="../Policies/ReturnRefundPolicy.html" style="text-decoration: none;">Return and Refund Policy</a>: Learn about our return and refund process, including eligibility and timelines.</h3>        
+            <h3 style="padding: 20px; margin-bottom: 10px; line-break: 20px;"><a href="../Policies/shipping.html" style="text-decoration: none;">Shipping Policy</a>: Find out about our shipping methods, estimated delivery times, and costs.</h3>
+            <h3 style="padding: 20px; margin-bottom: 10px; line-break: 20px;"><a href="../Policies/Paymentpolicy.html" style="text-decoration: none;">Payment Policy</a>: Understand our payment processing procedures and security measures.</h3>       
+            <h3 style="padding: 20px; margin-bottom: 10px; line-break: 20px;"><a href="../Policies/privacypolicy.html" style="text-decoration: none;">Privacy Policy</a>: Learn how we collect, store, and use your personal data.</h3>
+            <h3 style="padding: 20px; margin-bottom: 10px; line-break: 20px;"><a href="../Policies/ordercancellationpolicy.html" style="text-decoration: none;">Order Cancellation Policy</a>: Understand the process for canceling orders and any applicable fees.</h3>
+            <h3 style="padding: 20px; margin-bottom: 10px; line-break: 20px;"><a href="../Policies/productwarrantynsupport.html" style="text-decoration: none;">Product Warranty and Support</a>: Find out about our warranty terms and support options.</h3>
+            <h3 style="padding: 20px; margin-bottom: 10px; line-break: 20px;"><a href="../Policies/customerservicepolicy.html" style="text-decoration: none;">Customer Service Policy</a>: Learn about our customer support channels and response times.</h3>        
+            <h3 style="padding: 20px; margin-bottom: 10px; line-break: 20px;"><a href="../Policies/intellectualppropertynpolicy.html" style="text-decoration: none;">Intellectual Property Policy</a>: Understand our policies on content ownership and usage.</h3>
+        </div>  
+    </div>
+{% endblock %}

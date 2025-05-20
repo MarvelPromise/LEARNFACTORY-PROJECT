@@ -8,6 +8,7 @@ from .forms import CustomUserCreationForm
 from django.shortcuts import get_object_or_404
 from .models import Product, CartItem, Cart
 from django.http import JsonResponse
+import json
 from .models import *
 
 # ========================
@@ -44,7 +45,7 @@ def loginPage(request):
 
                 if user is not None:
                     login(request, user)
-                    return redirect('store')
+                    return redirect('Store')
                 else:
                     messages.error(request, 'Password is incorrect!')
 
@@ -58,42 +59,57 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
-# ========================
-# Store Views
-# ========================
+# =========================================== # Store Views # ==========================================================
 
 @login_required(login_url='login')
 def store(request):
-    products = Product.objects.all()
-    context = {'products': products}
-    return render(request, 'store/store.html', context)
 
+	if request.user.is_authenticated:
+		customer = request.user.customer
+		order, created = Order.objects.get_or_create(customer=customer, complete=False)
+		items = order.orderitem_set.all()
+		cartItems = order.orderitem_set.all()
+	else:
+		#Create empty cart for now for non-logged in user
+		items = []
+		order = {'get_cart_total':0, 'get_cart_items':0}
+		cartItems = order['get_cart_items']
+
+	products = Product.objects.all()
+	context = {'products':products, 'cartItems':cartItems}
+	return render(request, 'store/store.html', context)
+
+def cart(request, product_id):
+    product = Product.objects.get(pk=product_id)
+    cart = request.session.get('cart', {})
+    cart_item = cart.get(product_id)
+
+    if cart_item:
+        cart_item['quantity'] += 1
+    else:
+        cart_item = {'quantity': 1, 'product': product}
+
+    cart[product_id] = cart_item
+    request.sessional
 @login_required(login_url='login')
 def cart_view(request):
-    cart = request.session.get('cart', {})
-    cart_items = []
+    # Get or create the cart for the logged-in user
+    cart, created = Cart.objects.get_or_create(user=request.user)
+    
+    # Get all cart items for that cart
+    cart_items = CartItem.objects.filter(cart=cart)
     total_price = 0
-
-    for product_id, quantity in cart.items():
-        try:
-            product = Product.objects.get(id=product_id)
-            total = product.price * quantity
-            total_price += total
-            cart_items.append({
-                'product': product,
-                'quantity': quantity,
-                'total': total
-            })
-        except Product.DoesNotExist:
-            continue
-
+    
+    # Loop through each cart item to calculate total price
+    for item in cart_items:
+        total_price += item.product.price * item.quantity
+    
     context = {
         'cart_items': cart_items,
         'total_price': total_price,
     }
 
     return render(request, 'store/cart.html', context)
-
 
 @login_required(login_url='login')
 def checkout(request):
@@ -224,35 +240,67 @@ def product_list(request):
         'active_category': category_slug
     }
     return render(request, 'store/product_list.html', context)
-
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def add_to_cart(request, product_id):
-    if request.method == 'POST':
-        if not request.user.is_authenticated:
-            return JsonResponse({'success': False, 'message': 'User not logged in'})
+    product = get_object_or_404(Product, id=product_id)
 
-        product = Product.objects.get(id=product_id)
-        cart, created = Cart.objects.get_or_create(user=request.user)
-        
-        # Ensure you're using `cart` here
-        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    # Retrieve cart (e.g., via session or user)
+    cart_id = request.session.get("cart_id")
+    if not cart_id:
+        cart = Cart.objects.create()
+        request.session["cart_id"] = cart.id
+    else:
+        cart = Cart.objects.get(id=cart_id)
 
-        cart_item.quantity += 1
-        cart_item.save()
+    # Check if item already in cart
+    item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    if not created:
+        item.quantity += 1
+        item.save()
 
-        # Calculate total items in the cart
-        total_items = sum(item.quantity for item in cart.items.all())
-
-        return JsonResponse({'success': True, 'message': 'CartItem added', 'cart_count': total_items})
-
-    return JsonResponse({'success': False})
+    return redirect("cart_view")  # or return JsonResponse if using JS
 
 
+def updateItem(request):
+	data = json.loads(request.body)
+	productId = data['productId']
+	action = data['action']
+	print('Action:', action)
+	print('Product:', productId)
 
+	customer = request.user.customer
+	product = Product.objects.get(id=productId)
+	order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
+	orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+
+	if action == 'add':
+		orderItem.quantity = (orderItem.quantity + 1)
+	elif action == 'remove':
+		orderItem.quantity = (orderItem.quantity - 1)
+
+	orderItem.save()
+
+	if orderItem.quantity <= 0:
+		orderItem.delete()
+
+	return JsonResponse('Item was added', safe=False)
+
+def main(request):
+    return render(request, 'store/main.html')
 def about_us(request):
     return render(request, 'store/about_us.html')
 
+def contact_us(request):
+    return render(request, 'store/contact.html')
+
+def FAQs(request):
+    return render(request, 'store/faqs.html')
+
+def Store(request):
+    return render( request, 'store/store.html')
+def Policies(request):
+    return render(request, 'store/policieshome.html')
 def products_by_category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     products = Product.objects.filter(category=category)
@@ -274,3 +322,40 @@ def remove_from_cart(request, product_id):
 
 
 
+############################ Policies #############################
+def customerservicepolicy(request):
+    return render(request, 'Policies/customerservicepolicy.html')
+
+def intellectualpropertynpolicy(request):
+    return render(request, 'intellectualpropertynpolicy.html')
+
+def ordercancellationpolicy(request):
+    return render(request, 'Policies/ordercancellationpolicy.html')
+def paymentpolicy(request): 
+    return render(request, 'Policies/paymentpolicy.html')
+def privacypolicy(request):
+    return render(request, 'Policies/privacypolicy.html')
+def returnrefundpolicy(request):
+    return render(request, 'Policies/ReturnRefundpolicy.html')
+def productwarranty(request):
+    return render(request, 'Policies/productwarranty.html')
+def shippingpolicy(request):
+    return render(request, 'Policies/shippingpolicy.html')
+
+###################################### Fragrance category #####################################################
+def bodyspray(request):
+    return render(request,'category/Body Spray.html')
+def Fragrance(request):
+    return render(request, 'category/fragrance.html')
+
+def Footwear(request):
+    return render(request, 'category/shoes.html')
+def watch(request):
+    return render(request, 'category/watches.html')
+def jewelry(request):
+    return render(request, 'category/necklace.html')
+def roll_on(request):
+    return render(request, 'category/Roll-on.html')
+
+def perfume(request):
+    return render(request, 'category/perfume.html')

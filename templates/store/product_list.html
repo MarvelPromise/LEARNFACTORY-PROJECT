@@ -2,62 +2,62 @@
 {% load static %}
 
 {% block content %}
-<div class="sidebar">
-    <h3>Shop by Category</h3>
-    <ul class="category-list">
-        {% for category in categories %}
-            <li class="{% if category.slug == active_category %}active{% endif %}">
-                <a href="{% url 'product_list' %}?category={{ category.slug }}">{{ category.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
-
-<div class="content">
-    <h2 class="page-title">Products</h2>
-    <div class="product-grid">
-        {% for product in products %}
-        <div class="product-card">
-            {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}">
-            {% else %}
-            <img src="{% static 'default.png' %}" alt="No image">
-            {% endif %}
-            <h2>{{ product.name }}</h2>
-            <p>{{ product.description }}</p>
-            <p><strong>₦{{ product.price }}</strong></p>
-            <button onclick="addToCart('{{ product.id }}')">Add to Cart</button>
-
+<div class="product-container">
+    <div class="sidebar">
+        <h3>Shop by Category</h3>
+        <ul class="category-list">
+            {% for category in categories %}
+                <li class="{% if category.slug == active_category %}active{% endif %}">
+                    <a href="{% url 'product_list' %}?category={{ category.slug }}">{{ category.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="content">
+        <h2 class="page-title">Products</h2>
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                <img src="{% static 'default.png' %}" alt="No image">
+                {% endif %}
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+                <p><strong>₦{{ product.price }}</strong></p>
+                <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="btn">Add to Cart</button>
+    
+    
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+    </div>
+    
+    <!-- Cart icon/summary -->
+    <div class="cart-summary">
+        <span>Cart: <span id="cart-count">0</span> items</span>
     </div>
 </div>
 
-<!-- Cart icon/summary -->
-<div class="cart-summary">
-    <span>Cart: <span id="cart-count">0</span> items</span>
-</div>
 
 <script>
-    function addToCart(productId) {
-        fetch(`/add_to_cart/${productId}/`, {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': '{{ csrf_token }}',
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert(data.message); // Optional: show success message
-                // Update the cart count on the page
-                document.getElementById('cart-count').textContent = data.cart_count;
-            } else {
-                alert('Failed to add to cart');
-            }
-        });
-    }
+  function addToCart(productId, quantity) {
+    fetch(`/add_to_cart/${productId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken // Add CSRF token if needed
+        },
+        body: JSON.stringify({ quantity: quantity }) // Include quantity or any other data
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Handle the response (update cart UI, etc.)
+    });
+}
+
 </script>
 
 {% endblock %}

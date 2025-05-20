@@ -7,7 +7,7 @@
   height: 5000%;
   width: 500%;
   justify-content: center;
-  background-image: url('../img/images\ \(18\).jpeg') ;
+  background-image: (url('../img/images\ \(18\).jpeg')) ;
   background-size: cover;
   align-items: center;
   

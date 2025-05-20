@@ -26,6 +26,7 @@ class Product(models.Model):
     digital = models.BooleanField(default=False)
     image = models.ImageField(upload_to='media/', blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return self.name
@@ -47,7 +48,7 @@ class Cart(models.Model):
 
 # 5. CartItem model (linked to Cart and Product)
 class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 

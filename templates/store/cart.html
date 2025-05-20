@@ -1,32 +1,67 @@
-{% extends 'store/main.html' %}
-{% load static %}
+{% extends 'store/main.html'%}
+{% load custom_filters %}
+
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+<h2>Your Shopping Cart</h2>
 
-<div class="cart-container">
-    <h1>Your Cart</h1>
-    
-    {% if cart_items %}
-        <ul class="cart-list">
-            {% for item in cart_items %}
-                <li>
-                    <div class="cart-item-info">
-                        {{ item.product.name }} - ₦{{ item.product.price }} x {{ item.quantity }}
-                        ₦{{ item.product.price|floatformat:2|add:item.quantity|floatformat:2 }}
-                    </div>
-                    <div class="cart-actions">
-                        <a href="{% url 'remove_from_cart' item.product.id %}">Remove</a>
-                    </div>
-                </li>
+{% if items %}
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>₦{{ item.product.price }}</td>
+                <td>{{ item.quantity }}</td>
+                {{ item.product.price|multiply:item.quantity }}
+                <td>₦{{ item.total_price }}</td>
+                <td>
+                    <button class="update-cart" data-product="{{ item.product.id }}" data-action="add">+</button>
+                    <button class="update-cart" data-product="{{ item.product.id }}" data-action="remove">-</button>
+                </td>
+            </tr>
             {% endfor %}
-        </ul>
-        <p><strong>Total: ₦{{ total_price|floatformat:2 }}</strong></p>
-        <div style="text-align: right; margin-top: 10px;">
-            <a href="{% url 'checkout' %}" class="checkout-btn">Proceed to Checkout</a>
-        </div>
-    {% else %}
-        <p class="empty-cart">Your cart is empty.</p>
-    {% endif %}
-</div>
+        </tbody>
+    </table>
+
+    <h3>Total: ₦{{ total_price }}</h3>
+
+{% else %}
+    <p>Your cart is empty.</p>
+{% endif %}
+
+<script>
+    let buttons = document.getElementsByClassName('update-cart');
+
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function () {
+            let productId = this.dataset.product;
+            let action = this.dataset.action;
+            console.log('productId:', productId, 'Action:', action);
+
+            fetch('/UpdatItem/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                body: JSON.stringify({ 'productId': productId, 'action': action })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                location.reload();  // Refresh page to see updated cart
+            });
+        });
+    }
+</script>
 {% endblock %}

@@ -6,13 +6,13 @@
 
 <div class="container2">
  <div class="cont-8">
-  <h2>Checkout</h2>
+  <h2>Checkout</h2> 
 
   <div class="cont-3">
   
     <form method="POST" action="{% url 'process_order' %}">
       {% csrf_token %}
-      
+       
       <label for="address">Street Address:</label><br>
       <input type="text" name="address" placeholder="123 Main St" required><br>
   

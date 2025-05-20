@@ -43,6 +43,7 @@
       </table>
     {% else %}
       <p>You haven’t placed any orders yet.</p>
+      <a href="{% url 'product_list' %}"><button>Place Orders</button></a>
     {% endif %}
   </div>
 

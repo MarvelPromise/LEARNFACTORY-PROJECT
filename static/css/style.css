@@ -1,0 +1,205 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+}
+header nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid rgb(252, 250, 250);
+    box-shadow: 8px 0 5px 0px;
+    position:fixed;
+    width: 100%;
+    background-color: white;
+    top: 0px;
+    height: 50px;
+
+}
+header nav ul{
+    display: flex;
+    gap: 20px;
+}
+header nav ul li {
+    list-style-type: none;
+    
+}
+header nav ul li a{
+    text-decoration: none;
+    color: black;
+}
+.banner-1{
+    height:120vh;
+    /* color: whitesmoke; */
+    width: 100%;
+}
+.icons{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+/*-------------- --------------index------------------- */
+
+.ad1{
+    display: flex;
+    justify-content: space-between;
+    /* background-color: #fff; */
+} 
+.ad2 h1{
+    position: absolute;
+    z-index: 1;
+    top: 2600px;
+    color:olive;
+} 
+.ad2 h3{
+    position: absolute;
+    z-index: 1;
+    top: 2900px;
+    text-align: right; 
+    margin-right: 180px; 
+    font-size:50px;
+}
+.ad2 h3 b{
+    font-size:80px; 
+    color: red;
+}
+.ad2 h3 span{
+    color: red;
+}
+.C-sct{
+    display: flex;
+    overflow:hidden;
+
+}
+.sct{
+    display: flex;
+    flex-direction: column;
+    /* padding: 10px; */
+    justify-content:center;
+    text-align: center;
+    /* gap: 0px; */
+
+}
+.sct a{
+    padding: 10px;
+    font-size:large;
+    /* background-color: orange; */
+    border-radius: 10px;
+    padding-bottom: 80px;
+}
+.cate img{
+    margin-bottom: 10px;
+    border-radius: 20px;
+    height: 300px;
+    width: 190px;
+}
+.prd img{
+    width: 180px;
+    margin-bottom: 10px;
+    height: 200px;
+    /* box-shadow: 0 4px 8px rgba(31, 31, 31, 0.05); */
+    border-radius: 8px;
+    box-shadow: 1px 1px 9px rgb(201, 192, 192);
+
+}
+.cards input{
+    background-color: orange;
+    border: 0;
+    padding: 8px;
+    border-radius: 3px;
+    color: white;
+    margin-bottom: 80px;
+}
+
+.cards{
+    padding-bottom: 50px;
+}
+.brands{
+    display: grid;
+    grid-template-columns: repeat(6, 2fr);
+}
+.brands img{
+    width: 80px;
+    box-shadow: 0 4px 8px 2px rgba(31, 31, 31, 0.05); 
+
+}
+.formpart label{
+    padding: 10px;
+
+}
+
+main {
+    display: flex;
+}
+
+/* --------------------------------------------------- POlices --------------------------------------------- */
+.nav{
+    display: flex;
+    place-content: center;
+}
+
+ /*----------------------------- footer ------------------------------------*/
+.newsletter{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px;
+    background-color:black;
+    color: white;
+}
+.newsletter h1{
+    color: rgb(197, 182, 182);
+}
+.sub-bx{
+    display: flex;
+    padding: 8px;
+    /* width: 500px; */
+    gap:10px ;
+}
+#sub-bx_input{
+    display: flex;
+    padding: 20px;
+    margin: 0;
+    width: 350px;
+    border-radius: 5px;
+}
+#sub-btn{
+    background-color: red;
+    padding: 5px;
+    margin: 0;
+    border-radius: 5px;
+    border:none;
+    width: 100px;
+    margin-top: 2px;
+}
+.links{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 25px;
+    line-height: 35px;
+}
+.links h3{
+    text-align: center;
+} 
+.last{
+    text-align: center;
+    padding: 20px;
+}
+.socials{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 30px;
+}
+a{
+    color: black;
+}
